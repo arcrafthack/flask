@@ -1,0 +1,31 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packman Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .map { font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Packman Game</h1>
+    <div id="game"></div>
+    <script>
+        fetch('/maps')
+            .then(response => response.json())
+            .then(maps => {
+                const gameDiv = document.getElementById('game');
+                maps.forEach((map, index) => {
+                    const mapDiv = document.createElement('div');
+                    mapDiv.className = 'map';
+                    mapDiv.innerText = `Level ${index + 1}:\n` + map.join('\n');
+                    gameDiv.appendChild(mapDiv);
+                });
+            });
+    </script>
+</body>
+</html>
